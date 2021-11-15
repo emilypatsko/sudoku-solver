@@ -1,6 +1,7 @@
 const { performance } = require('perf_hooks');
 
-// 36.14ms to solve
+// 34.57ms to solve
+// 85,258 backtracks
 var sudoku: Array<number> = [
     0, 0, 0, 0, 0, 2, 1, 0, 0,
     0, 0, 4, 0, 0, 8, 7, 0, 0,
@@ -14,6 +15,7 @@ var sudoku: Array<number> = [
 ];
 
 // Really hard sudoku: 3113.14ms
+// 12,207,027 backtracks
 // var sudoku: Array<number> = [
 //     0, 0, 0, 8, 0, 1, 0, 0, 0,
 //     0, 0, 0, 0, 0, 0, 0, 4, 3,
@@ -98,6 +100,7 @@ const isAcceptableMove = (sudoku: Array<number>, index: number, i: number): bool
 
 // Brute force approach
 // function solveSudoku(index: number = 0)
+var backtracks = 0;
 const solveSudoku = (index: number = 0) => {
     while (index < 81 && sudoku[index] != 0) {
         index++;
@@ -113,6 +116,7 @@ const solveSudoku = (index: number = 0) => {
         }
     }
     sudoku[index] = 0;
+    backtracks++;
     return false;
 };
 
@@ -122,3 +126,4 @@ solveSudoku();
 var finish = performance.now();
 printSudoku();
 console.log(`Took ${(finish-start).toFixed(2)}ms to solve`);
+console.log(`Had to backtrack ${backtracks} times`)
