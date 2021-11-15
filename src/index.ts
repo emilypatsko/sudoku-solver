@@ -1,3 +1,6 @@
+const { performance } = require('perf_hooks');
+
+// 36.14ms to solve
 var sudoku: Array<number> = [
     0, 0, 0, 0, 0, 2, 1, 0, 0,
     0, 0, 4, 0, 0, 8, 7, 0, 0,
@@ -8,7 +11,20 @@ var sudoku: Array<number> = [
     0, 0, 3, 0, 0, 5, 0, 8, 0,
     0, 0, 8, 2, 0, 0, 5, 0, 0,
     0, 0, 9, 7, 0, 0, 0, 0, 0,
-  ];
+];
+
+// Really hard sudoku: 3113.14ms
+// var sudoku: Array<number> = [
+//     0, 0, 0, 8, 0, 1, 0, 0, 0,
+//     0, 0, 0, 0, 0, 0, 0, 4, 3,
+//     5, 0, 0, 0, 0, 0, 0, 0, 0,
+//     0, 0, 0, 0, 7, 0, 8, 0, 0,
+//     0, 0, 0, 0, 0, 0, 1, 0, 0,
+//     0, 2, 0, 0, 3, 0, 0, 0, 0,
+//     6, 0, 0, 0, 0, 0, 0, 7, 5,
+//     0, 0, 3, 4, 0, 0, 0, 0, 0,
+//     0, 0, 0, 2, 0, 0, 6, 0, 0,
+// ]
   
 const printSudoku = () => {
     const thickLine = "||=============================||";
@@ -101,5 +117,8 @@ const solveSudoku = (index: number = 0) => {
 };
 
 printSudoku();
+var start = performance.now();
 solveSudoku();
+var finish = performance.now();
 printSudoku();
+console.log(`Took ${(finish-start).toFixed(2)}ms to solve`);
